@@ -1,0 +1,32 @@
+Produce:
+docker exec --interactive --tty kafka1 kafka-console-producer --bootstrap-server kafka1:19092 --topic test-topic
+
+Consume:
+docker exec --interactive --tty kafka1 kafka-console-consumer --bootstrap-server kafka1:19092 --topic test-topic --from-beginning
+
+Produce with key:
+docker exec --interactive --tty kafka1 kafka-console-producer --bootstrap-server kafka1:19092 --topic test-topic --property "key.separator=-" --property "parse.key=true"
+
+Consume with key:
+docker exec --interactive --tty kafka1 kafka-console-consumer --bootstrap-server kafka1:19092 --topic library-events --from-beginning --property "key.separator= - " --property "print.key=true"
+
+Consumer Msg using consumer groups:
+docker exec --interactive --tty kafka1 kafka-console-consumer --bootstrap-server kafka1:19092 --topic test-topic --group console-consumer-7056 --property "key.separator= - " --property "print.key=true"
+
+List all topics:
+docker exec --interactive --tty kafka1 kafka-topics --bootstrap-server kafka1:19092 --list
+
+Command to describe all the Kafka topics:
+docker exec --interactive --tty kafka1 kafka-topics --bootstrap-server kafka1:19092 --describe
+
+Command to describe a specific Kafka topic:
+docker exec --interactive --tty kafka1 kafka-topics --bootstrap-server kafka1:19092 --describe --topic test-topic
+
+Alter topic partitions:
+docker exec --interactive --tty kafka1 kafka-topics --bootstrap-server kafka1:19092 --alter --topic test-topic --partitions 2
+
+View Consumer groups:
+docker exec --interactive --tty kafka1 kafka-consumer-groups --bootstrap-server kafka1:19092 --list
+
+View Consumer groups and offset:
+docker exec --interactive --tty kafka1 kafka-consumer-groups --bootstrap-server kafka1:19092 --describe --group console-consumer-41911
